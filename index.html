@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6b6d2">
+  <title>UwU Café • Pago semanal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-paws"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logo-uwu.png" alt="UwU Café">
+      <div>
+        <strong>UwU Café</strong>
+        <span>POSTRES & BEBIDAS • FIVEM ROLEPLAY</span>
+      </div>
+    </div>
+    <button id="lockBtn" class="ghost">🔒 Bloquear</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">🐾 ADMINISTRACIÓN • SOLO JEFES</span>
+        <h1>Pago semanal</h1>
+        <p>40% de las facturas + 100% de las propinas.</p>
+      </div>
+      <div class="week-box">
+        <small>SEMANA ACTUAL</small>
+        <b id="weekLabel">—</b>
+        <button id="resetWeek" class="danger">🧹 Cerrar / limpiar semana</button>
+      </div>
+    </section>
+
+    <section class="rules">
+      <article><b>40%</b><span>de las facturas</span></article>
+      <article><b>100%</b><span>de las propinas</span></article>
+      <article><b>100</b><span>máx. facturas por trabajador</span></article>
+      <article><b>100</b><span>máx. propinas por trabajador</span></article>
+    </section>
+
+    <section class="toolbar card">
+      <div>
+        <h2>📁 Trabajadores</h2>
+        <p>Cada trabajador tiene su propia carpeta para registrar facturas y propinas.</p>
+      </div>
+      <div class="add-worker">
+        <input id="workerName" maxlength="80" placeholder="Nombre del trabajador">
+        <button id="addWorker">+ Crear carpeta</button>
+      </div>
+    </section>
+
+    <section id="workerList" class="workers"></section>
+
+    <section class="totals card">
+      <div><span>TOTAL FACTURADO</span><b id="allInvoices">$0</b></div>
+      <div><span>40% DE FACTURAS</span><b id="allForty">$0</b></div>
+      <div><span>TOTAL PROPINAS</span><b id="allTips">$0</b></div>
+      <div class="pay"><span>TOTAL A PAGAR</span><b id="allPay">$0</b></div>
+    </section>
+  </main>
+
+  <div id="pinModal" class="modal hidden">
+    <div class="pin-card">
+      <button id="pinClose" class="x">×</button>
+      <div class="lock">🔐</div>
+      <h2>Área protegida</h2>
+      <p>Introduce el PIN de jefatura para acceder al pago semanal.</p>
+      <input id="pinInput" type="password" maxlength="12" autocomplete="off" placeholder="PIN">
+      <div id="pinError" class="error"></div>
+      <div class="modal-actions">
+        <button id="pinCancel" class="ghost">Cancelar</button>
+        <button id="pinEnter">Entrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="detailModal" class="modal hidden">
+    <div class="detail-card">
+      <button id="detailClose" class="x">×</button>
+      <div class="detail-head">
+        <div>
+          <span class="eyebrow">📁 CARPETA DEL TRABAJADOR</span>
+          <h2 id="detailName">Trabajador</h2>
+        </div>
+        <div class="detail-pay">
+          <small>TOTAL A PAGAR</small>
+          <b id="detailPay">$0</b>
+        </div>
+      </div>
+
+      <div class="detail-stats">
+        <div><span>FACTURAS</span><b id="detailInvoices">$0</b></div>
+        <div><span>40% FACTURAS</span><b id="detailForty">$0</b></div>
+        <div><span>PROPINAS 100%</span><b id="detailTips">$0</b></div>
+      </div>
+
+      <div class="entry-columns">
+        <div class="entry-card">
+          <div class="entry-title">
+            <div><h3>🧾 Facturas</h3><span id="invoiceCount">0 / 100</span></div>
+            <button id="addInvoice">+ Agregar</button>
+          </div>
+          <div id="invoiceList" class="entry-list"></div>
+          <div class="entry-total"><span>Total facturas</span><b id="invoiceTotal">$0</b></div>
+        </div>
+
+        <div class="entry-card">
+          <div class="entry-title">
+            <div><h3>💵 Propinas</h3><span id="tipCount">0 / 100</span></div>
+            <button id="addTip">+ Agregar</button>
+          </div>
+          <div id="tipList" class="entry-list"></div>
+          <div class="entry-total"><span>Total propinas</span><b id="tipTotal">$0</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
