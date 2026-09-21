@@ -1,6 +1,6 @@
 # UwU Café — Pago semanal
 
-Herramienta independiente basada únicamente en la parte de **Pago semanal** del proyecto BurgerShot Tool de valsbness.
+Herramienta independiente basada únicamente en la parte de **Pago semanal** del proyecto de valsbness.
 
 ## Incluye
 - Área de pago semanal protegida por PIN.
@@ -16,10 +16,10 @@ Herramienta independiente basada únicamente en la parte de **Pago semanal** del
 - Logo de UwU Café incluido.
 
 ## PIN
-El PIN inicial es `1234`.
+El PIN inicial es `****`.
 
 Cámbialo en `script.js`, en la primera línea:
-`const PIN="1234";`
+`const PIN="****";`
 
 ## Importante
 El PIN de esta versión es una protección de interfaz del navegador, no una seguridad de servidor. Para una protección real entre varios dispositivos habría que conectar autenticación y una base de datos (por ejemplo, Supabase).
