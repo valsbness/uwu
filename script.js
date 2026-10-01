@@ -1,4 +1,4 @@
-const PIN="1234"; // Cambia este PIN antes de publicar la herramienta.
+const PIN="0310"; // Cambia este PIN antes de publicar la herramienta.
 const MAX=100;
 const KEY="uwuPagoSemanalV1";
 const $=id=>document.getElementById(id);
@@ -18,7 +18,7 @@ function toast(t){$("toast").textContent=t;$("toast").classList.add("show");setT
 function totals(w){
   const f=w.invoices.reduce((a,x)=>a+(Number(x)||0),0);
   const t=w.tips.reduce((a,x)=>a+(Number(x)||0),0);
-  return {f,t,forty:f*.4,pay:f*.4+t};
+  return {f,t,thirty:f*.4,pay:f*.4+t};
 }
 function openPin(action){
   pinAction=action;$("pinInput").value="";$("pinError").textContent="";
@@ -37,7 +37,7 @@ function render(){
   data.workers.forEach(w=>{
     const z=totals(w),el=document.createElement("article");el.className="worker";
     el.innerHTML=`<div class="worker-top"><h3>📁 ${esc(w.name)}</h3><button class="delete">🗑 Eliminar</button></div>
-      <div class="worker-stats"><div><span>FACTURAS</span><b>${money(z.f)}</b></div><div><span>40% A PAGAR</span><b>${money(z.forty)}</b></div><div class="pay"><span>TOTAL A PAGAR</span><b>${money(z.pay)}</b></div></div>`;
+      <div class="worker-stats"><div><span>FACTURAS</span><b>${money(z.f)}</b></div><div><span>30% A PAGAR</span><b>${money(z.thirty)}</b></div><div class="pay"><span>TOTAL A PAGAR</span><b>${money(z.pay)}</b></div></div>`;
     el.onclick=()=>requireUnlocked(()=>openDetail(w.id));
     el.querySelector(".delete").onclick=e=>{e.stopPropagation();requireUnlocked(()=>{if(confirm(`¿Eliminar la carpeta de ${w.name}?`)){data.workers=data.workers.filter(x=>x.id!==w.id);save();render();toast("Carpeta eliminada")}})};
     root.appendChild(el);
@@ -53,7 +53,7 @@ function openDetail(id){
 function closeDetail(){currentId=null;$("detailModal").classList.add("hidden")}
 function renderDetail(){
   const w=data.workers.find(x=>x.id===currentId);if(!w)return;
-  const z=totals(w);$("detailInvoices").textContent=money(z.f);$("detailForty").textContent=money(z.forty);$("detailTips").textContent=money(z.t);$("detailPay").textContent=money(z.pay);
+  const z=totals(w);$("detailInvoices").textContent=money(z.f);$("detailForty").textContent=money(z.thirty);$("detailTips").textContent=money(z.t);$("detailPay").textContent=money(z.pay);
   $("invoiceCount").textContent=`${w.invoices.length} / ${MAX}`;$("tipCount").textContent=`${w.tips.length} / ${MAX}`;
   $("invoiceList").innerHTML=w.invoices.map((v,i)=>entryHtml("invoice",i,v)).join("")||'<div class="empty">No hay facturas registradas.</div>';
   $("tipList").innerHTML=w.tips.map((v,i)=>entryHtml("tip",i,v)).join("")||'<div class="empty">No hay propinas registradas.</div>';
