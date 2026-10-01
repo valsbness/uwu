@@ -18,7 +18,7 @@ function toast(t){$("toast").textContent=t;$("toast").classList.add("show");setT
 function totals(w){
   const f=w.invoices.reduce((a,x)=>a+(Number(x)||0),0);
   const t=w.tips.reduce((a,x)=>a+(Number(x)||0),0);
-  return {f,t,thirty:f*.4,pay:f*.4+t};
+  return {f,t,thirty:f*.3,pay:f*.3+t};
 }
 function openPin(action){
   pinAction=action;$("pinInput").value="";$("pinError").textContent="";
@@ -43,7 +43,7 @@ function render(){
     root.appendChild(el);
   });
   let f=0,t=0;data.workers.forEach(w=>{const z=totals(w);f+=z.f;t+=z.t});
-  $("allInvoices").textContent=money(f);$("allForty").textContent=money(f*.4);$("allTips").textContent=money(t);$("allPay").textContent=money(f*.4+t);
+  $("allInvoices").textContent=money(f);$("allThirty").textContent=money(f*.3);$("allTips").textContent=money(t);$("allPay").textContent=money(f*.3+t);
 }
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function openDetail(id){
@@ -53,7 +53,7 @@ function openDetail(id){
 function closeDetail(){currentId=null;$("detailModal").classList.add("hidden")}
 function renderDetail(){
   const w=data.workers.find(x=>x.id===currentId);if(!w)return;
-  const z=totals(w);$("detailInvoices").textContent=money(z.f);$("detailForty").textContent=money(z.thirty);$("detailTips").textContent=money(z.t);$("detailPay").textContent=money(z.pay);
+  const z=totals(w);$("detailInvoices").textContent=money(z.f);$("detailThirty").textContent=money(z.thirty);$("detailTips").textContent=money(z.t);$("detailPay").textContent=money(z.pay);
   $("invoiceCount").textContent=`${w.invoices.length} / ${MAX}`;$("tipCount").textContent=`${w.tips.length} / ${MAX}`;
   $("invoiceList").innerHTML=w.invoices.map((v,i)=>entryHtml("invoice",i,v)).join("")||'<div class="empty">No hay facturas registradas.</div>';
   $("tipList").innerHTML=w.tips.map((v,i)=>entryHtml("tip",i,v)).join("")||'<div class="empty">No hay propinas registradas.</div>';
